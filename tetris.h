@@ -17,5 +17,4 @@ bool    next(tetris t, piece p);
 bool    right(tetris t, piece p);
 bool    left(tetris t, piece p);
 bool    turn(tetris t, piece p);
-void    print_tetris(tetris t);
 #endif

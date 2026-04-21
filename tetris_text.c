@@ -3,6 +3,29 @@
 #include "struct.h"
 #include "stdio.h"
 
+void    print_tetris(tetris t) {
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            switch (t->matrice[i][j])
+            {
+            case 0:
+                printf(" ");
+                break;
+            case 1:
+                printf("x");
+                break;
+            case 2:
+                printf("o");
+                break;
+
+            default:
+                break;
+            }
+        }
+        printf("\n");
+    }
+}
+
 int main(void) {
     char    c;
     tetris  t;
