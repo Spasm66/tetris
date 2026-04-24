@@ -2,8 +2,10 @@
 #include "tetris.h"
 #include "struct.h"
 #include "stdio.h"
+#define WIDTH 10
+#define HEIGHT 20
 
-void    print_tetris(tetris t) {
+void    game_print_tetris(tetris t) {
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
             switch (t->matrice[i][j])
@@ -31,28 +33,28 @@ int main(void) {
     tetris  t;
     piece   p;
 
-    p = new_3line();
-    t = new_tetris(HEIGHT, WIDTH);
+    p = game_new_random_piece();
+    t = game_new_tetris(WIDTH, HEIGHT);
     c = 'n';
     while (c != 'q') {
         switch (c)
         {
         case 'n':
-            if (!next(t, p))
-                p = new_3line();
-            print_tetris(t);
+            if (!game_next(t, p))
+                p = game_new_random_piece();
+            game_print_tetris(t);
             break;
         case 'r':
-            right(t, p);
-            print_tetris(t);
+            game_right(t, p);
+            game_print_tetris(t);
             break;
         case 'l':
-            left(t, p);
-            print_tetris(t);
+            game_left(t, p);
+            game_print_tetris(t);
             break;
         case 't':
-            turn(t, p);
-            print_tetris(t);
+            game_turn(t, p);
+            game_print_tetris(t);
             break;
         default:
             break;

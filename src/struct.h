@@ -1,7 +1,5 @@
 #ifndef __STRUCT__
 #define __STRUCT__
-#define WIDTH 20
-#define HEIGHT 15
 
 typedef enum {
     NORTH,
@@ -17,10 +15,12 @@ typedef enum {
 } square;
 
 typedef enum {
-    SQUARE,
-    THREELINE,
-    FOURLINE,
+    O,
+    I,
+    S,
+    Z,
     L,
+    J,
     T,
 } type;
 
@@ -41,6 +41,8 @@ typedef struct piece_s {
 
 typedef struct tetris_s {
     square  **matrice;
+    int     w;
+    int     h;
 } tetris_s;
 
 #endif
