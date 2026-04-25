@@ -40,6 +40,8 @@ bool    game_hitting_floor(tetris t, piece p) {
     for (int x = 0; x < p->size; x++) {
         int nx = p->pos->x + p->corp[x]->x + 1;
         int ny = p->pos->y + p->corp[x]->y;
+        if (nx >= t->h || ny < 0 || ny >= t->w)
+            return true;
         if (nx >= t->h || t->matrice[nx][ny] == FLOOR){
             return true;
         }
@@ -51,18 +53,43 @@ bool    game_collapse_floor_wall(tetris t, piece p) {
     for (int x = 0; x < p->size; x++) {
         int nx = p->pos->x + p->corp[x]->x;
         int ny = p->pos->y + p->corp[x]->y;
-        if (ny <= 0 || ny >= t->w || nx < 0 || nx >= t->h ||t->matrice[nx][ny] == FLOOR){
+        if (ny < 0 || ny >= t->w || nx < 0 || nx >= t->h ||t->matrice[nx][ny] == FLOOR){
             return true;
         }
     }
     return false;
 }
 
+int     game_check_row(tetris t) {
+    int sum;
+
+    for (int i = 0; i < t->h; i++) {
+        sum = 0;
+        for (int j = 0; j < t->w; j++)
+            sum += t->matrice[i][j];
+        if (sum == t->w * 2)
+            return (i);
+    }
+    return (-1);
+}
+
+void game_remove_row(tetris t, int row) {
+    for (int i = row; i >= 1; i--)
+        t->matrice[i] = t->matrice[i-1];
+}
+
 void    game_fossilize(tetris t, piece p) {
+    int row;
+
     for (int x = 0; x < p->size; x++) {
         int i = p->pos->x + p->corp[x]->x;
         int j = p->pos->y + p->corp[x]->y;
         t->matrice[i][j] = FLOOR;
+    }
+    row = game_check_row(t);
+    while (row != -1) {
+        game_remove_row(t, row);
+        row = game_check_row(t);
     }
     game_destroy_piece(p);
 }
@@ -74,7 +101,8 @@ void    game_update_piece(tetris t, piece p) {
     for (int x = 0; x < p->size; x++) {
         i = p->pos->x + p->corp[x]->x;
         j = p->pos->y + p->corp[x]->y;
-        t->matrice[i][j] = PIECE;
+        if (i >= 0 && i < t->h && j >= 0 && j < t->w)
+            t->matrice[i][j] = PIECE;
     }
 }
 
