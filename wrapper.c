@@ -1,6 +1,7 @@
 #include <emscripten.h>
 #include "src/tetris.h"
 #include "src/piece.h"
+#include <stdlib.h>
 
 EMSCRIPTEN_KEEPALIVE
 tetris new_tetris(int h, int w) {
@@ -58,8 +59,35 @@ bool turn(tetris t, piece p) {
 }
 
 EMSCRIPTEN_KEEPALIVE
-piece new_random_piece() {
-    return game_new_random_piece();
+piece new_random_piece(int r) {
+    switch (r)
+    {
+    case 0:
+        return (game_new_O());
+        break;
+    case 1:
+        return (game_new_I());
+        break;
+    case 2:
+        return (game_new_S());
+        break;
+     case 3:
+        return (game_new_Z());
+        break;
+    case 4:
+        return (game_new_L());
+        break;
+    case 5:
+        return (game_new_J());
+        break;
+    case 6:
+        return (game_new_T());
+        break;
+    
+    default:
+        break;
+    }
+    return (NULL);
 }
 
 EMSCRIPTEN_KEEPALIVE
