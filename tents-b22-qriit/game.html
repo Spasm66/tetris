@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="images/tent.png">
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: url('images/background.jpg') ;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; 
+        }
+        h1{
+            text-align: center;
+            margin: auto;
+        }
+
+        
+
+        #mycanvas{
+            background-image: url('images/game_background.png');
+            display: block;
+            border: 3px solid black;
+            border-radius: 8;
+            
+        }
+
+        #resizeHandle {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+
+        #toolbar{
+            display:flex; 
+            gap:8px; 
+            align-items:center; 
+            flex-wrap:wrap; 
+            padding:10px;
+
+        }
+
+        .dropdown {
+        display: none;
+        position: absolute;
+        background: white;
+        z-index: 1;
+        flex-direction: column;
+        }
+
+        .dropdown.open {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ********************* html ********************* -->
+
+    <h1>Game Tents</h1>
+
+    
+        <div id ="toolbar">
+             <div style="position: relative;">
+                <button onclick="toggleGameMenu()">Game</button>
+                <div id="gameMenu" class="dropdown">
+                    <button onclick="enterGameId()">Enter game ID...</button>
+                    <button onclick="enterSeed()">Enter random seed...</button>
+                    <button onclick="downloadSave()">Download save file...</button>
+                    <button onclick="uploadSave()">Upload save file...</button>
+                </div>
+            </div>
+
+            <div style="position: relative;">
+                <button onclick="toggleTypeMenu()">New game</button>
+                <div id="typeMenu" class="dropdown">
+                    <button onclick="loadType(8,8)">8x8 Easy</button>
+                    <button onclick="loadType(10,10)">10x10</button>
+                    <button onclick="loadType(15,15)">15x15</button>
+                </div>
+            </div>
+            
+        
+            <button onclick="restartGame()">Restart</button>
+            <button onclick="undoMove()">Undo</button>
+            <button onclick="redoMove()">Redo</button>
+            <button onclick="solveGame()">Solve</button>
+        </div>
+
+    <div style="position: relative; display: inline-block;">
+        <canvas id='mycanvas' width="400" height="400"></canvas>
+        <div id="resizeHandle" >&#128310;</div>
+    </div>
+    <script src="game.js"></script>
+    <script src="demo.js"> </script>
+
+</body>
+
+</html>
