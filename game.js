@@ -1954,22 +1954,46 @@ var ___wasm_call_ctors = Module["___wasm_call_ctors"] = createExportWrapper("__w
 var _new_tetris = Module["_new_tetris"] = createExportWrapper("new_tetris");
 
 /** @type {function(...*):?} */
-var _clear_piece = Module["_clear_piece"] = createExportWrapper("clear_piece");
-
-/** @type {function(...*):?} */
 var _destroy_piece = Module["_destroy_piece"] = createExportWrapper("destroy_piece");
 
 /** @type {function(...*):?} */
 var _hitting_floor = Module["_hitting_floor"] = createExportWrapper("hitting_floor");
 
 /** @type {function(...*):?} */
-var _collapse_floor_wall = Module["_collapse_floor_wall"] = createExportWrapper("collapse_floor_wall");
+var _hitting_at_right = Module["_hitting_at_right"] = createExportWrapper("hitting_at_right");
+
+/** @type {function(...*):?} */
+var _hitting_at_left = Module["_hitting_at_left"] = createExportWrapper("hitting_at_left");
 
 /** @type {function(...*):?} */
 var _fossilize = Module["_fossilize"] = createExportWrapper("fossilize");
 
 /** @type {function(...*):?} */
 var _update_piece = Module["_update_piece"] = createExportWrapper("update_piece");
+
+/** @type {function(...*):?} */
+var _collapse_floor_wall = Module["_collapse_floor_wall"] = createExportWrapper("collapse_floor_wall");
+
+/** @type {function(...*):?} */
+var _score_updator = Module["_score_updator"] = createExportWrapper("score_updator");
+
+/** @type {function(...*):?} */
+var _get_score = Module["_get_score"] = createExportWrapper("get_score");
+
+/** @type {function(...*):?} */
+var _set_score = Module["_set_score"] = createExportWrapper("set_score");
+
+/** @type {function(...*):?} */
+var _get_level = Module["_get_level"] = createExportWrapper("get_level");
+
+/** @type {function(...*):?} */
+var _set_level = Module["_set_level"] = createExportWrapper("set_level");
+
+/** @type {function(...*):?} */
+var _get = Module["_get"] = createExportWrapper("get");
+
+/** @type {function(...*):?} */
+var _set = Module["_set"] = createExportWrapper("set");
 
 /** @type {function(...*):?} */
 var _next = Module["_next"] = createExportWrapper("next");
@@ -1981,16 +2005,31 @@ var _right = Module["_right"] = createExportWrapper("right");
 var _left = Module["_left"] = createExportWrapper("left");
 
 /** @type {function(...*):?} */
-var _turn = Module["_turn"] = createExportWrapper("turn");
-
-/** @type {function(...*):?} */
 var _new_random_piece = Module["_new_random_piece"] = createExportWrapper("new_random_piece");
 
 /** @type {function(...*):?} */
-var _get = Module["_get"] = createExportWrapper("get");
+var _turn = Module["_turn"] = createExportWrapper("turn");
 
 /** @type {function(...*):?} */
-var _set = Module["_set"] = createExportWrapper("set");
+var _new_O = Module["_new_O"] = createExportWrapper("new_O");
+
+/** @type {function(...*):?} */
+var _new_I = Module["_new_I"] = createExportWrapper("new_I");
+
+/** @type {function(...*):?} */
+var _new_S = Module["_new_S"] = createExportWrapper("new_S");
+
+/** @type {function(...*):?} */
+var _new_Z = Module["_new_Z"] = createExportWrapper("new_Z");
+
+/** @type {function(...*):?} */
+var _new_L = Module["_new_L"] = createExportWrapper("new_L");
+
+/** @type {function(...*):?} */
+var _new_J = Module["_new_J"] = createExportWrapper("new_J");
+
+/** @type {function(...*):?} */
+var _new_T = Module["_new_T"] = createExportWrapper("new_T");
 
 /** @type {function(...*):?} */
 var ___errno_location = Module["___errno_location"] = createExportWrapper("__errno_location");

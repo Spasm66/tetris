@@ -104,6 +104,10 @@ piece   game_new_L(void) {
     return p;
 }
 
+void     game_next(piece p) {
+    p->pos->x++;
+}
+
 piece   game_new_J(void) {
     piece   p;
     position_s corp_data[] = {{-1, 0}, {0,0}, {1,0}, {1,-1}};
@@ -142,6 +146,14 @@ piece   game_new_T(void) {
     p->pos->x = 1;
     p->pos->y = 5;
     return p;
+}
+
+void game_right(piece p) {
+    p->pos->y++;
+}
+
+void game_left(piece p) {
+    p->pos->y--;
 }
 
 piece   game_new_random_piece(void) {

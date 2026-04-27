@@ -16,6 +16,9 @@ tetris  game_new_tetris(int w, int h) {
     t->matrice = malloc(h * sizeof(int*));
     for (int i = 0; i < h; i++)
         t->matrice[i] = calloc(w, sizeof(int));
+    t->score = 0;
+    t->level = 1;
+    t->del_row = 0;
     return t;
 }
 
@@ -73,13 +76,30 @@ int     game_check_row(tetris t) {
     return (-1);
 }
 
-void game_remove_row(tetris t, int row) {
+void    game_remove_row(tetris t, int row) {
     for (int i = row; i >= 1; i--)
         t->matrice[i] = t->matrice[i-1];
 }
 
-void    game_fossilize(tetris t, piece p) {
+int     game_get_score(tetris t) {
+    return (t->score);
+}
+
+void    game_set_score(tetris t, int s) {
+        t->score = s;
+}
+
+int     game_get_level(tetris t) {
+    return (t->level);
+}
+
+void    game_set_level(tetris t, int l) {
+        t->level = l;
+}
+
+int     game_fossilize(tetris t, piece p) {
     int row;
+    int nb;
 
     for (int x = 0; x < p->size; x++) {
         int i = p->pos->x + p->corp[x]->x;
@@ -87,11 +107,14 @@ void    game_fossilize(tetris t, piece p) {
         t->matrice[i][j] = FLOOR;
     }
     row = game_check_row(t);
+    nb = 0;
     while (row != -1) {
         game_remove_row(t, row);
         row = game_check_row(t);
+        nb += 1;
     }
     game_destroy_piece(p);
+    return (nb);
 }
 
 void    game_update_piece(tetris t, piece p) {
@@ -106,40 +129,30 @@ void    game_update_piece(tetris t, piece p) {
     }
 }
 
-bool    game_next(tetris t, piece p) {
-    if (game_hitting_floor(t, p)) {
-        game_update_piece(t, p);
-        game_fossilize(t, p);
-        return (false);
-    }
-    p->pos->x++;
-    if (game_hitting_floor(t, p)) {
-        game_update_piece(t, p);
-        game_fossilize(t, p);
-        return (false);
-    }
-    game_update_piece(t, p);
-    return (true);
+bool    game_score_updator(tetris t, int del_row) {
+    return (false);
 }
 
-bool game_right(tetris t, piece p) {
-    p->pos->y++;
-    if (game_collapse_floor_wall(t, p)) {
-        p->pos->y--;
-        return (false);
+bool game_hitting_at_right(tetris t, piece p) {
+    for (int x = 0; x < p->size; x++) {
+        int ny = p->pos->y + p->corp[x]->y;
+        int nx = p->pos->x + p->corp[x]->x;
+        if (ny+1 >= t->w || t->matrice[nx][ny+1] == FLOOR){
+            return true;
+        }
     }
-    game_update_piece(t, p);
-    return (true);
+    return false;
 }
 
-bool game_left(tetris t, piece p) {
-    p->pos->y--;
-    if (game_collapse_floor_wall(t, p)) {
-        p->pos->y++;
-        return (false);
+bool game_hitting_at_left(tetris t, piece p) {
+    for (int x = 0; x < p->size; x++) {
+        int ny = p->pos->y + p->corp[x]->y;
+        int nx = p->pos->x + p->corp[x]->x;
+        if (ny <= 0 || t->matrice[nx][ny-1] == FLOOR){
+            return true;
+        }
     }
-    game_update_piece(t, p);
-    return (true);
+    return false;
 }
 
 bool    game_turn(tetris t, piece p) {
@@ -164,7 +177,6 @@ bool    game_turn(tetris t, piece p) {
         p->orientation = (p->orientation + 3) % 4;
         return false;
     }
-    game_update_piece(t, p);
     return true;
 }
 

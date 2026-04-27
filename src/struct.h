@@ -43,6 +43,9 @@ typedef struct tetris_s {
     square  **matrice;
     int     w;
     int     h;
+    int     level;
+    int     score;
+    int     del_row;
 } tetris_s;
 
 #endif
